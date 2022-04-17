@@ -6,7 +6,7 @@
 /*   By: ptoshiko <ptoshiko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 15:13:14 by ptoshiko          #+#    #+#             */
-/*   Updated: 2022/04/03 20:15:50 by ptoshiko         ###   ########.fr       */
+/*   Updated: 2022/04/14 21:48:15 by ptoshiko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,9 @@ typedef struct s_map
 size_t	ft_strlen(const char *c);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	**ft_split(char const *s, char c);
 int		ft_ind_n(char *arr);
+int		ft_atoi(const char *str);
 char	*get_next_line(int fd);
 char	*ft_strdup(const char *s1);
 void	ft_bzero(void *s, size_t n);

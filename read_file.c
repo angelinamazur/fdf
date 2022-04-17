@@ -6,7 +6,7 @@
 /*   By: ptoshiko <ptoshiko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 15:16:42 by ptoshiko          #+#    #+#             */
-/*   Updated: 2022/04/03 22:20:28 by ptoshiko         ###   ########.fr       */
+/*   Updated: 2022/04/17 22:25:45 by ptoshiko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,11 @@ int	get_height(char *file)
 	height = 0;
 	while (line != NULL)
 	{
-		printf("%s", line);
+		// printf("%s", line);
 		line = get_next_line(fd);
 		height++;
 	}
+	printf("%d\n", fd);
 	close(fd);
 	free(line);
 	return (height);
@@ -63,27 +64,42 @@ int	get_width(char *file)
 
 	fd = open(file, O_RDONLY, 0);
 	line = get_next_line(fd);
-	printf("line %s\n", line);
 	width = ft_word_count(line, ' ');
+	// printf("%d\n", fd);
+	while (line != NULL)
+	{
+		line = get_next_line(fd);
+	}
 	close(fd);
 	free(line);
 	return (width);
 }
 
-void	fill_values(t_map *map, char *line)
+void	fill_values(int *line_v, char *line)
 {
-	
+	char	**num;
+	int		i;
+
+	num = ft_split(line, ' ');
+	i = 0;
+	while (num[i])
+	{
+		line_v[i] = ft_atoi(num[i]);
+		free(num[i]);
+		i++;
+	}
+	free(num);
 }
 
-int	**get_values(char *file, t_map *map)
+void	read_file(char *file, t_map *map)
 {
 	int		fd;
 	char	*line;
 	int		i;
-	int		**values;
-	char	*line;
 
-	values = (int **)malloc(sizeof(int *) * (map->height + 1));
+	map->height = get_height(file);
+	map->width = get_width(file);
+	map->values = (int **)malloc(sizeof(int *) * (map->height + 1));
 	i = 0;
 	while (i <= map->height)
 	{
@@ -93,17 +109,15 @@ int	**get_values(char *file, t_map *map)
 	fd = open(file, O_RDONLY, 0);
 	i = 0;
 	line = get_next_line(fd);
+	printf("%d\n", fd);
 	while (line)
 	{
-		fill_values(map, line);
+		printf("%s\n", line);
+		fill_values(map->values[i], line);
+		free(line);
 		line = get_next_line(fd);
+		i++;
 	}
 	free(line);
-}
-
-void	read_file(char *file, t_map *map)
-{
-	map->height = get_height(file);
-	map->width = get_width(file);
-	map->values = get_values(file, map);
+	map->values[i] = NULL;
 }

@@ -1,35 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ptoshiko <ptoshiko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/03 15:18:15 by ptoshiko          #+#    #+#             */
-/*   Updated: 2022/04/17 22:33:40 by ptoshiko         ###   ########.fr       */
+/*   Created: 2021/10/16 23:13:18 by ptoshiko          #+#    #+#             */
+/*   Updated: 2022/04/14 21:46:02 by ptoshiko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
-#include <stdio.h>
-
-int	main(int argc, char **argv)
+int	ft_atoi(const char *str)
 {
-	t_map	*map;
-	int i;
-	int j;
-	
+	int			i;
+	int			sign;
+	long int	res;
+
 	i = 0;
-	map = (t_map *)malloc(sizeof(t_map));
-	read_file("10-2.fdf", map);
-	printf("%d\n", map->height);
-	printf("%d\n", map->width);
-	while (i < map->height)
-	{
-		j = 0;
-		while (j < map->width)
-			printf("%d ", map->values[i][j++]);
+	sign = 1;
+	res = 0;
+	while (str[i] == '\t' || str[i] == '\n' || str[i] == '\v'\
+	|| str[i] == '\f' || str[i] == '\r' || str[i] == ' ')
 		i++;
-		printf("\n");
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			sign = -1;
+		i++;
 	}
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		res = res * 10 + (str[i] - '0');
+		i++;
+	}
+	return (res * sign);
 }
