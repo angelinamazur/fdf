@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_file.c                                        :+:      :+:    :+:   */
+/*   read_read_file.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ptoshiko <ptoshiko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/03 15:16:42 by ptoshiko          #+#    #+#             */
-/*   Updated: 2022/04/17 22:25:45 by ptoshiko         ###   ########.fr       */
+/*   Created: 2022/04/19 18:01:38 by ptoshiko          #+#    #+#             */
+/*   Updated: 2022/04/19 19:19:09 by ptoshiko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include  "fdf.h"
+#include "fdf.h"
 #include <stdio.h>
 
 static int	ft_word_count(char const *s, char c)
@@ -35,6 +35,15 @@ static int	ft_word_count(char const *s, char c)
 	return (count - 1);
 }
 
+int	get_width(char *line)
+{
+	int		fd;
+	int		width;
+
+	width = ft_word_count(line, ' ');
+	return (width);
+}
+
 int	get_height(char *file)
 {
 	int		fd;
@@ -46,33 +55,13 @@ int	get_height(char *file)
 	height = 0;
 	while (line != NULL)
 	{
-		// printf("%s", line);
 		line = get_next_line(fd);
+		free(line);
 		height++;
 	}
-	printf("%d\n", fd);
 	close(fd);
 	free(line);
 	return (height);
-}
-
-int	get_width(char *file)
-{
-	int		fd;
-	int		width;
-	char	*line;
-
-	fd = open(file, O_RDONLY, 0);
-	line = get_next_line(fd);
-	width = ft_word_count(line, ' ');
-	// printf("%d\n", fd);
-	while (line != NULL)
-	{
-		line = get_next_line(fd);
-	}
-	close(fd);
-	free(line);
-	return (width);
 }
 
 void	fill_values(int *line_v, char *line)
@@ -98,7 +87,9 @@ void	read_file(char *file, t_map *map)
 	int		i;
 
 	map->height = get_height(file);
-	map->width = get_width(file);
+	fd = open(file, O_RDONLY, 0);
+	line = get_next_line(fd);
+	map->width = get_width(line);
 	map->values = (int **)malloc(sizeof(int *) * (map->height + 1));
 	i = 0;
 	while (i <= map->height)
@@ -106,18 +97,16 @@ void	read_file(char *file, t_map *map)
 		map->values[i] = (int *)malloc(sizeof(int) * (map->width + 1));
 		i++;
 	}
-	fd = open(file, O_RDONLY, 0);
 	i = 0;
-	line = get_next_line(fd);
-	printf("%d\n", fd);
 	while (line)
 	{
-		printf("%s\n", line);
 		fill_values(map->values[i], line);
 		free(line);
 		line = get_next_line(fd);
 		i++;
 	}
+	close(fd);
 	free(line);
 	map->values[i] = NULL;
 }
+
