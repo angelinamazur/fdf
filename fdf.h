@@ -6,7 +6,7 @@
 /*   By: ptoshiko <ptoshiko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 15:13:14 by ptoshiko          #+#    #+#             */
-/*   Updated: 2022/04/19 22:38:33 by ptoshiko         ###   ########.fr       */
+/*   Updated: 2022/05/01 21:34:18 by ptoshiko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,15 @@ typedef struct s_map
 	void	*mlx_ptr;
 	void	*win_ptr;
 }	t_map;
+
+typedef struct s_data
+{
+	void	*img;
+	char	*addr;
+	int		bits;
+	int		line_length;
+	int		endian;
+}	t_data;
 
 size_t	ft_strlen(const char *c);
 char	*ft_strjoin(char *s1, char *s2);

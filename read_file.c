@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_read_file.c                                   :+:      :+:    :+:   */
+/*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ptoshiko <ptoshiko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 18:01:38 by ptoshiko          #+#    #+#             */
-/*   Updated: 2022/04/19 19:19:09 by ptoshiko         ###   ########.fr       */
+/*   Updated: 2022/05/01 17:29:11 by ptoshiko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
 
 static int	ft_word_count(char const *s, char c)
 {
@@ -37,7 +36,6 @@ static int	ft_word_count(char const *s, char c)
 
 int	get_width(char *line)
 {
-	int		fd;
 	int		width;
 
 	width = ft_word_count(line, ' ');
@@ -109,4 +107,3 @@ void	read_file(char *file, t_map *map)
 	free(line);
 	map->values[i] = NULL;
 }
-

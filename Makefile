@@ -1,7 +1,6 @@
 NAME = fdf
 
-SRC = get_next_line.c get_next_line_utils.c main.c ft_atoi.c ft_split.c read_file.c\
-		draw.c
+SRCS = get_next_line.c get_next_line_utils.c main.c ft_atoi.c ft_split.c read_file.c
 
 HEADER = fdf.h
 
@@ -15,8 +14,8 @@ CFLAGS = -Wall -Wextra -Werror -I$(HEADER)
 
 all : $(NAME)
 
-$(NAME): $(OBJ)
-	$(CC) $(OBJ) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+$(NAME): $(OBJS)
+	$(CC) $(OBJS) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 %.o: %.c
 	$(CC) -Wall -Wextra -Werror -Imlx -c $< -o $@

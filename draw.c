@@ -6,7 +6,7 @@
 /*   By: ptoshiko <ptoshiko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 19:25:07 by ptoshiko          #+#    #+#             */
-/*   Updated: 2022/04/19 22:43:32 by ptoshiko         ###   ########.fr       */
+/*   Updated: 2022/05/01 19:03:44 by ptoshiko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,21 @@ float	mod(float i)
 		return (-i);
 	else
 		return (i);
+}
+
+void	bresenham(int x0, int y0, int x1, int y1, t_map *map)
+{
+	float	k;
+	float	s;
+
+	s = 1;
+	k = (y1 - y0) / (x1 - x0);
+	// mlx_pixel_put(map->mlx_ptr, map->win_ptr, x0, y0, 0xffffff);
+	{
+		
+	}	
+	
+	
 }
 
 void	bresenham(int x1, int y1, int x2, int y2, t_map *map)
