@@ -6,7 +6,7 @@
 /*   By: ptoshiko <ptoshiko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 18:01:38 by ptoshiko          #+#    #+#             */
-/*   Updated: 2022/05/01 17:29:11 by ptoshiko         ###   ########.fr       */
+/*   Updated: 2022/06/02 21:57:44 by ptoshiko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	ft_word_count(char const *s, char c)
 			flag = 0;
 		i++;
 	}
-	return (count - 1);
+	return (count);
 }
 
 int	get_width(char *line)
@@ -62,21 +62,22 @@ int	get_height(char *file)
 	return (height);
 }
 
-void	fill_values(int *line_v, char *line)
-{
-	char	**num;
-	int		i;
+// void	fill_values(int *line_v, char *line)
+// {
+// 	char	**num;
+// 	int		i;
 
-	num = ft_split(line, ' ');
-	i = 0;
-	while (num[i])
-	{
-		line_v[i] = ft_atoi(num[i]);
-		free(num[i]);
-		i++;
-	}
-	free(num);
-}
+// 	num = ft_split(line, ' ');
+// 	i = 0;
+// 	while (num[i]) 
+// 	{
+// 		line_v[i] = ft_atoi(num[i]); // here color ?
+// 		free(num[i]);
+// 		i++;
+// 	}
+// 	free(num);
+// }
+
 
 void	read_file(char *file, t_map *map)
 {
@@ -88,22 +89,39 @@ void	read_file(char *file, t_map *map)
 	fd = open(file, O_RDONLY, 0);
 	line = get_next_line(fd);
 	map->width = get_width(line);
-	map->values = (int **)malloc(sizeof(int *) * (map->height + 1));
+
+	map->map = (t_elem **)malloc(sizeof(t_elem *) * (map->height + 1));
 	i = 0;
 	while (i <= map->height)
 	{
-		map->values[i] = (int *)malloc(sizeof(int) * (map->width + 1));
+		map->map[i] = (t_elem *)malloc(sizeof(t_elem) * (map->width + 1));
 		i++;
 	}
+
 	i = 0;
 	while (line)
 	{
-		fill_values(map->values[i], line);
-		free(line);
-		line = get_next_line(fd);
-		i++;
+		fill_value(map->map
+		fill_color()
 	}
-	close(fd);
-	free(line);
-	map->values[i] = NULL;
+	
+// 	map->values = (int **)malloc(sizeof(int *) * (map->height + 1));
+// 	i = 0;
+// 	while (i <= map->height)
+// 	{
+// 		map->values[i] = (int *)malloc(sizeof(int) * (map->width + 1));
+// 		i++;
+// 	}
+// 	i = 0;
+// 	while (line)
+// 	{
+// 		fill_values(map->values[i], line);
+// 		free(line);
+// 		line = get_next_line(fd);
+// 		i++;
+// 	}
+// 	close(fd);
+// 	free(line);
+// 	map->values[i] = NULL;
+// }
 }

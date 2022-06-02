@@ -6,7 +6,7 @@
 /*   By: ptoshiko <ptoshiko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 15:13:14 by ptoshiko          #+#    #+#             */
-/*   Updated: 2022/05/01 21:34:18 by ptoshiko         ###   ########.fr       */
+/*   Updated: 2022/06/02 21:57:15 by ptoshiko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,26 +17,24 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <mlx.h>
+# include <math.h>
 # define BUFFER_SIZE 100
+
+typedef struct s_elem
+{
+	int color; // ?
+	int value;
+}	t_elem;
 
 typedef struct s_map
 {
 	int		width;
 	int		height;
-	int		**values;
-
+	t_elem	**map;
+	int		zoom;
 	void	*mlx_ptr;
 	void	*win_ptr;
 }	t_map;
-
-typedef struct s_data
-{
-	void	*img;
-	char	*addr;
-	int		bits;
-	int		line_length;
-	int		endian;
-}	t_data;
 
 size_t	ft_strlen(const char *c);
 char	*ft_strjoin(char *s1, char *s2);
@@ -49,6 +47,7 @@ char	*ft_strdup(const char *s1);
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t count, size_t size);
 void	read_file(char *file, t_map *map);
-void	bresenham(int x1, int y1, int x2, int y2, t_map *map);
+void	bresenham(float x0, float y0, float x1, float y1, t_map *map);
+void	draw(t_map *map);
 
 #endif
