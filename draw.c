@@ -6,7 +6,7 @@
 /*   By: ptoshiko <ptoshiko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 19:25:07 by ptoshiko          #+#    #+#             */
-/*   Updated: 2022/06/02 20:16:35 by ptoshiko         ###   ########.fr       */
+/*   Updated: 2022/06/03 16:43:18 by ptoshiko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	bresenham(float x, float y, float x1, float y1, t_map *map)
 	
 	while ((int)(x - x1) || (int)(y - y1))
 	{
-		mlx_pixel_put(map->mlx_ptr, map->win_ptr, x, y, map->color);
+		mlx_pixel_put(map->mlx_ptr, map->win_ptr, x, y, map->map.color);
 		x += x_del;
 		y += y_del;
 	}

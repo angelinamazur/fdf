@@ -6,7 +6,7 @@
 /*   By: ptoshiko <ptoshiko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 18:01:38 by ptoshiko          #+#    #+#             */
-/*   Updated: 2022/06/02 21:57:44 by ptoshiko         ###   ########.fr       */
+/*   Updated: 2022/06/03 17:38:39 by ptoshiko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,18 +78,47 @@ int	get_height(char *file)
 // 	free(num);
 // }
 
+int ft_hex_atoi(char *str)
+{
+	int i;
+	char *s;
+
+	s = "0123456789ABCDEF";
+	while (str[i] != ',') // to hex 
+		i++; 
+	if (str[i]) = 
+	
+}
+
+
+void	fill_value(t_elem *map, char *line)
+{
+	char	**num;
+	int		i;
+
+	num = ft_split(line, ' ');
+	i = 0;
+	while (num[i]) 
+	{
+		map[i].value = ft_atoi(num[i]);
+		map[i].color = ft_hexatoi(num[i]);
+		free(num[i]);
+		i++;
+	}
+	free(num);
+}
 
 void	read_file(char *file, t_map *map)
 {
 	int		fd;
 	char	*line;
 	int		i;
+	int		j;
 
 	map->height = get_height(file);
 	fd = open(file, O_RDONLY, 0);
-	line = get_next_line(fd);
+	line = get_next_line(fd); // ? close 
 	map->width = get_width(line);
-
 	map->map = (t_elem **)malloc(sizeof(t_elem *) * (map->height + 1));
 	i = 0;
 	while (i <= map->height)
@@ -97,13 +126,15 @@ void	read_file(char *file, t_map *map)
 		map->map[i] = (t_elem *)malloc(sizeof(t_elem) * (map->width + 1));
 		i++;
 	}
-
 	i = 0;
 	while (line)
 	{
-		fill_value(map->map
-		fill_color()
+		fill_values(map->map[i], line);
+		free(line);
+		line = get_next_line(fd);
+		i++;
 	}
+}
 	
 // 	map->values = (int **)malloc(sizeof(int *) * (map->height + 1));
 // 	i = 0;

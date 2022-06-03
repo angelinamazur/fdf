@@ -6,7 +6,7 @@
 /*   By: ptoshiko <ptoshiko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 15:13:14 by ptoshiko          #+#    #+#             */
-/*   Updated: 2022/06/02 21:57:15 by ptoshiko         ###   ########.fr       */
+/*   Updated: 2022/06/03 16:45:39 by ptoshiko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 typedef struct s_elem
 {
-	int color; // ?
+	int color;
 	int value;
 }	t_elem;
 
