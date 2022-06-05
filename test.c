@@ -6,41 +6,43 @@
 /*   By: ptoshiko <ptoshiko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 21:50:17 by ptoshiko          #+#    #+#             */
-/*   Updated: 2022/04/17 21:56:00 by ptoshiko         ###   ########.fr       */
+/*   Updated: 2022/06/05 16:33:58 by ptoshiko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
-#include <stddef.h>
 #include <stdio.h>
-#include  "fdf.h"
+#include <stdlib.h>
+#include "fdf.h"
 
-int main()
+int ft_hextodec(char *hex)
 {
-	int		fd;
-	char	*line;
-
-	fd = open("10-2.fdf", O_RDONLY, 0);
-	line = get_next_line(fd);
-	printf("%d\n", fd);
-	printf("%s\n", line);
+	int dec;
+	int x;
+	int y;
+	int i;
+	
+	dec = 0;
+	y = 0;
+	i = ft_strlen(hex) - 1;
+	while (i >= 0)
+	{
+		if((hex[i]) >= '0' && (hex[i]) <= '9')
+			x = hex[i] - '0';
+		if ((hex[i]) >= 'A' && (hex[i]) <= 'F')
+			x = hex[i] - 'A' + 10;
+		if ((hex[i]) >= 'a' && (hex[i]) <= 'f')
+			x = hex[i] - 'a' + 10;
+		dec = dec + x * pow(16, y);
+		i--;
+		y++;
+	}
+	return (dec);
 }
 
-// #include <stdio.h>
-// #include <stdlib.h>
-// void f(char *a)
-// {
-// 	for (int i = 0; i < 10; i++)
-// 		a[i]  = 97 + i;
-// }
-
-
-
-// int main()
-// {
-// 	char	a[10];
-
-// 	f(a);
-// 	for(int i =0; i < 10; i++)
-// 		printf("%c\n", a[i]);
-// }
+int main(void)
+{
+	int a;
+	
+	a = ft_hextodec("A12");
+	printf("%d", a);
+}
