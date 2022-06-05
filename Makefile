@@ -1,6 +1,6 @@
 NAME = fdf
 
-SRCS = get_next_line.c get_next_line_utils.c main.c ft_atoi.c ft_split.c read_file.c 
+SRCS = get_next_line.c get_next_line_utils.c main.c ft_atoi.c ft_split.c read_file.c draw.c
 
 HEADER = fdf.h
 

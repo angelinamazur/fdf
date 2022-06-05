@@ -6,7 +6,7 @@
 /*   By: ptoshiko <ptoshiko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 18:01:38 by ptoshiko          #+#    #+#             */
-/*   Updated: 2022/06/05 17:31:42 by ptoshiko         ###   ########.fr       */
+/*   Updated: 2022/06/05 18:10:47 by ptoshiko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,10 +122,9 @@ int ft_color(char *str)
 	if (j == 0)
 		color = 16777215;
 	else
-		color = ft_hextodec (str + j + 2);
+		color = ft_hextodec (str + j + 3);
 	return (color);
 }
-
 
 void	fill_values(t_elem *map, char *line)
 {

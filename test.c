@@ -6,7 +6,7 @@
 /*   By: ptoshiko <ptoshiko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 21:50:17 by ptoshiko          #+#    #+#             */
-/*   Updated: 2022/06/05 16:33:58 by ptoshiko         ###   ########.fr       */
+/*   Updated: 2022/06/05 17:51:36 by ptoshiko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,6 @@ int main(void)
 {
 	int a;
 	
-	a = ft_hextodec("A12");
+	a = ft_hextodec("FFFFFF");
 	printf("%d", a);
 }
