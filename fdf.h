@@ -6,7 +6,7 @@
 /*   By: ptoshiko <ptoshiko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 15:13:14 by ptoshiko          #+#    #+#             */
-/*   Updated: 2022/06/07 14:53:38 by ptoshiko         ###   ########.fr       */
+/*   Updated: 2022/06/07 19:23:40 by ptoshiko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ typedef struct s_map
 	int		height;
 	t_elem	**map;
 	int		zoom;
+	int		shift_x;
+	int		shift_y;
 	void	*mlx_ptr;
 	void	*win_ptr;
 	void	*img;

@@ -6,18 +6,35 @@
 /*   By: ptoshiko <ptoshiko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 15:18:15 by ptoshiko          #+#    #+#             */
-/*   Updated: 2022/06/07 18:50:25 by ptoshiko         ###   ########.fr       */
+/*   Updated: 2022/06/07 22:23:03 by ptoshiko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include <stdio.h>
 
-// int		deal_key(int key)
-// {
-// 	printf("%d", key); // ft_printf !
-// 	return(0);
-// }
+// 126 up
+// 125 down
+// 123 left
+// 124 right
+
+
+int		deal_key(int key, t_map *map)
+{
+	printf("%d\n", key);
+	if (key == 126)
+		map->shift_y -= 10;
+	if (key == 125)
+		map->shift_y += 10;
+	if (key == 123)
+		map->shift_x -= 10;
+	if (key == 124)
+		map->shift_x += 10;
+	// mlx_clear_window(map->mlx_ptr,map->win_ptr);
+	// mlx_destroy_image (map->mlx_ptr, map->img);
+	draw(map);
+	return(0);
+}
 
 int	main(void)
 {
@@ -27,7 +44,7 @@ int	main(void)
 
 	i = 0;
 	map = (t_map *)malloc(sizeof(t_map));
-	read_file("t1.fdf", map);
+	read_file("42.fdf", map);
 	// printf("%d\n", map->height);
 	// printf("%d\n", map->width);
 	// while (i < map->height)
@@ -55,6 +72,7 @@ int	main(void)
 	map->zoom  = 20;
 	draw(map);
 	mlx_put_image_to_window(map->mlx_ptr, map->win_ptr,  map->img, 0, 0);
+	// mlx_key_hook(map->win_ptr, deal_key, NULL);
 	mlx_loop(map->mlx_ptr);
 }
 
