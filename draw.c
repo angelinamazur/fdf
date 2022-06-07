@@ -6,7 +6,7 @@
 /*   By: ptoshiko <ptoshiko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 19:25:07 by ptoshiko          #+#    #+#             */
-/*   Updated: 2022/06/05 20:55:36 by ptoshiko         ###   ########.fr       */
+/*   Updated: 2022/06/07 18:48:29 by ptoshiko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,25 +39,24 @@ void isometric(float *x, float *y, int z) // ?
 	*y = (*x + *y) * sin(0.8) - z;
 }
 
+void ft_mlx_pixel_put(t_map *data, int x, int y, int color)
+{
+	char *dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	*(unsigned int*)dst = color; 
+}
+
 void	bresenham(float x, float y, float x1, float y1, t_map *map)
 {
 	float	x_del;
 	float	y_del;
 	int		max;
 	int		color;
-	
-	color = map->map[(int)y][(int)x].color;
 	int		z;
 	int		z1;
 	
+	color = map->map[(int)y][(int)x].color;
 	z = map->map[(int)y][(int)x].value;
 	z1 = map->map[(int)y1][(int)x1].value;
-
-	// write(1, "here!\n", 6);
-	
-	// printf("here %d", map->map[(int)y][(int)x].color);
-	// fflush(stdout);
-
 	x *= map->zoom;
 	y *= map->zoom;
 	x1 *= map->zoom;
@@ -65,10 +64,10 @@ void	bresenham(float x, float y, float x1, float y1, t_map *map)
 	
 	isometric(&x, &y, z);
 	isometric(&x1, &y1, z1);
-	x +=250;
-	y +=250;
-	x1 +=250;
-	y1 +=250;
+	x +=100;
+	y +=100;
+	x1 +=100;
+	y1 +=100;
 	// 0xFF0000 16711680
 	// map->map[(int)y][(int)x].color
 	// y1 +=150;
@@ -78,10 +77,9 @@ void	bresenham(float x, float y, float x1, float y1, t_map *map)
 	max = find_max(mod(x_del), mod(y_del));
 	x_del /= max;
 	y_del /= max;
-	
 	while ((int)(x - x1) || (int)(y - y1))
 	{
-		mlx_pixel_put(map->mlx_ptr, map->win_ptr, x, y, color);
+		ft_mlx_pixel_put(map, x, y, color);
 		x += x_del;
 		y += y_del;
 	}

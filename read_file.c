@@ -6,12 +6,11 @@
 /*   By: ptoshiko <ptoshiko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 18:01:38 by ptoshiko          #+#    #+#             */
-/*   Updated: 2022/06/05 18:10:47 by ptoshiko         ###   ########.fr       */
+/*   Updated: 2022/06/07 13:53:13 by ptoshiko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h> 
 
 static int	ft_word_count(char const *s, char c)
 {
@@ -62,23 +61,6 @@ int	get_height(char *file)
 	free(line);
 	return (height);
 }
-
-// void	fill_values(int *line_v, char *line)
-// {
-// 	char	**num;
-// 	int		i;
-
-// 	num = ft_split(line, ' ');
-// 	i = 0;
-// 	while (num[i]) 
-// 	{
-// 		line_v[i] = ft_atoi(num[i]); // here color ?
-// 		free(num[i]);
-// 		i++;
-// 	}
-// 	free(num);
-// }
-
 
 int ft_hextodec(char *hex)
 {

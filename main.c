@@ -6,7 +6,7 @@
 /*   By: ptoshiko <ptoshiko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 15:18:15 by ptoshiko          #+#    #+#             */
-/*   Updated: 2022/06/05 20:56:32 by ptoshiko         ###   ########.fr       */
+/*   Updated: 2022/06/07 18:50:25 by ptoshiko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(void)
 
 	i = 0;
 	map = (t_map *)malloc(sizeof(t_map));
-	read_file("elem-col.fdf", map);
+	read_file("t1.fdf", map);
 	// printf("%d\n", map->height);
 	// printf("%d\n", map->width);
 	// while (i < map->height)
@@ -49,8 +49,12 @@ int	main(void)
 	// 	printf("\n");
 	// }
 	map->mlx_ptr = mlx_init();
-	map->win_ptr = mlx_new_window(map->mlx_ptr, 1000, 1000, "FDF");
+	map->win_ptr = mlx_new_window(map->mlx_ptr, 1920, 1080, "FDF");
+	map->img = mlx_new_image(map->mlx_ptr, 1920, 1080);
+	map->addr = mlx_get_data_addr(map->img, &map->bits_per_pixel, & map->line_length, &map->endian);
 	map->zoom  = 20;
 	draw(map);
+	mlx_put_image_to_window(map->mlx_ptr, map->win_ptr,  map->img, 0, 0);
 	mlx_loop(map->mlx_ptr);
 }
+
