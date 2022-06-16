@@ -6,7 +6,7 @@
 /*   By: ptoshiko <ptoshiko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 18:01:38 by ptoshiko          #+#    #+#             */
-/*   Updated: 2022/06/07 13:53:13 by ptoshiko         ###   ########.fr       */
+/*   Updated: 2022/06/16 20:46:03 by ptoshiko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,32 +125,53 @@ void	fill_values(t_elem *map, char *line)
 	free(num);
 }
 
-void	read_file(char *file, t_map *map)
+void make_env(t_env **env, int height, int width)
+{
+	int i;
+	
+	i = 0;
+	(*env)->height = height;
+	(*env)->width = width;
+	(*env)->zoom = 20;
+	(*env)->shift_x = 0;
+	(*env)->shift_y = 0;
+	(*env)->map = (t_elem **)malloc(sizeof(t_elem *) * (height + 1));
+	while (i <= height)
+	{
+		(*env)->map[i] = (t_elem *)malloc(sizeof(t_elem) * (width + 1));
+		i++;
+	}
+}
+
+void	read_file(char *file, t_env *env)
 {
 	int		fd;
 	char	*line;
 	int		i;
+	int		height;
+	int		width;
 
-	map->height = get_height(file);
+	height = get_height(file);
 	fd = open(file, O_RDONLY, 0);
 	line = get_next_line(fd);
-	map->width = get_width(line);
-	map->map = (t_elem **)malloc(sizeof(t_elem *) * (map->height + 1));
-	i = 0;
-	while (i <= map->height)
-	{
-		map->map[i] = (t_elem *)malloc(sizeof(t_elem) * (map->width + 1));
-		i++;
-	}
+	width = get_width(line);
+	make_env(&env, height, width);
+	// map->map = (t_elem **)malloc(sizeof(t_elem *) * (map->height + 1));
+	// i = 0;
+	// while (i <= map->height)
+	// {
+	// 	map->map[i] = (t_elem *)malloc(sizeof(t_elem) * (map->width + 1));
+	// 	i++;
+	// }
 	i = 0;
 	while (line)
 	{
-		fill_values(map->map[i], line);
+		fill_values(env->map[i], line);
 		free(line);
 		line = get_next_line(fd);
 		i++;
 	}
 	close(fd);
 	free(line);
-	map->map[i] = NULL;
+	env->map[i] = NULL;
 }
