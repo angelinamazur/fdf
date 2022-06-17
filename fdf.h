@@ -6,7 +6,7 @@
 /*   By: ptoshiko <ptoshiko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 15:13:14 by ptoshiko          #+#    #+#             */
-/*   Updated: 2022/06/16 20:47:11 by ptoshiko         ###   ########.fr       */
+/*   Updated: 2022/06/17 17:32:49 by ptoshiko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,18 @@
 # include <fcntl.h>
 # include <stddef.h>
 # include <stdlib.h>
-# include <unistd.h>
 # include <mlx.h>
 # include <math.h>
 # define BUFFER_SIZE 100
+# define UP 126
+# define DOWN 125 
+# define LEFT 123
+# define RIGHT 124 
+# define ESC 53
+# define ZOOM_OUT 24
+# define ZOOM_IN 27
+# define W_WIDTH 1920
+# define W_HEIGHT 1080
 
 typedef struct s_elem
 {
@@ -57,5 +65,6 @@ void	*ft_calloc(size_t count, size_t size);
 void	read_file(char *file, t_env *env);
 void	bresenham(float x0, float y0, float x1, float y1, t_env *env);
 void	draw(t_env *env);
+void 	free_map(t_elem **map, int height);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ptoshiko <ptoshiko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 19:25:07 by ptoshiko          #+#    #+#             */
-/*   Updated: 2022/06/16 20:59:45 by ptoshiko         ###   ########.fr       */
+/*   Updated: 2022/06/17 20:09:26 by ptoshiko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,12 @@ void isometric(float *x, float *y, int z) // ?
 }
 
 void ft_mlx_pixel_put(t_env *data, int x, int y, int color)
-{
-	char *dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color; 
+{	
+	if (x < W_WIDTH && y < W_HEIGHT && x > 0 && y > 0)
+	{
+		char *dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+		*(unsigned int*)dst = color; 
+	}
 }
 
 void	bresenham(float x, float y, float x1, float y1, t_env *env)
@@ -69,17 +72,6 @@ void	bresenham(float x, float y, float x1, float y1, t_env *env)
 	y += env->shift_y;
 	x1 += env->shift_x;
 	y1 += env->shift_y;
-
-
-	// x += 10;
-	// y += 10;
-	// x1 += 10;
-	// y1 += 10;
-	
-	
-	// 0xFF0000 16711680
-	// map->map[(int)y][(int)x].color
-	// y1 +=150;
 	
 	x_del = x1 - x;
 	y_del = y1 - y;
@@ -88,10 +80,9 @@ void	bresenham(float x, float y, float x1, float y1, t_env *env)
 	y_del /= max;
 	while ((int)(x - x1) || (int)(y - y1))
 	{
-		// printf("x_del %f y_del %f x %f y %f x1 %f y1 %f \n", x_del, y_del, x, y, x1, y1);
 		ft_mlx_pixel_put(env, x, y, color);
 		x += x_del;
-		y += y_del;
+		y += y_del;	
 	}
 }
 
@@ -99,10 +90,7 @@ void draw(t_env *env)
 {
 	int x;
 	int y;
-	
-	// ft_bzero(env->addr, env->height * env->width * \
-    //     (env->bits_per_pixel / 8));
-	printf("addr %s\n", env->addr);
+ 
 	y = 0;
 	while (y < env->height)
 	{
