@@ -6,12 +6,11 @@
 /*   By: ptoshiko <ptoshiko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 19:25:07 by ptoshiko          #+#    #+#             */
-/*   Updated: 2022/06/17 20:09:26 by ptoshiko         ###   ########.fr       */
+/*   Updated: 2022/06/18 22:06:30 by ptoshiko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h> // clean 
 
 int	find_max(float a, float b)
 {
@@ -57,16 +56,19 @@ void	bresenham(float x, float y, float x1, float y1, t_env *env)
 	int		z1;
 	
 	color = env->map[(int)y][(int)x].color;
-	z = env->map[(int)y][(int)x].value;
-	z1 = env->map[(int)y1][(int)x1].value;
+	z = env->map[(int)y][(int)x].value * (env->z_k);
+	z1 = env->map[(int)y1][(int)x1].value * (env->z_k);
 	
 	x *= env->zoom;
 	y *= env->zoom;
 	x1 *= env->zoom;
 	y1 *= env->zoom;
 	
-	isometric(&x, &y, z);
-	isometric(&x1, &y1, z1);
+	if(env->iso_flag == 1)
+	{
+		isometric(&x, &y, z);
+		isometric(&x1, &y1, z1);
+	}
 	
 	x += env->shift_x;
 	y += env->shift_y;

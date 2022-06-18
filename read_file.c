@@ -6,7 +6,7 @@
 /*   By: ptoshiko <ptoshiko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 18:01:38 by ptoshiko          #+#    #+#             */
-/*   Updated: 2022/06/16 20:46:03 by ptoshiko         ###   ########.fr       */
+/*   Updated: 2022/06/18 22:05:09 by ptoshiko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	get_height(char *file)
 	return (height);
 }
 
-int ft_hextodec(char *hex)
+int ft_hex_to_dec(char *hex)
 {
 	int dec;
 	int x;
@@ -72,6 +72,8 @@ int ft_hextodec(char *hex)
 	dec = 0;
 	y = 0;
 	i = ft_strlen(hex) - 1;
+	if (hex[i] == '\n')
+		i--;
 	while (i >= 0)
 	{
 		if((hex[i]) >= '0' && (hex[i]) <= '9')
@@ -87,7 +89,7 @@ int ft_hextodec(char *hex)
 	return (dec);
 }
 
-int ft_color(char *str)
+int ft_color(char *str, int value)
 {
 	int color;
 	int i;
@@ -102,9 +104,16 @@ int ft_color(char *str)
 		i++;
 	}
 	if (j == 0)
-		color = 16777215;
+	{
+		if (value == 0)
+			color = 16777215;
+		if (value > 0)
+			color = 15463513;
+		if (value < 0)
+			color = 5444021;
+	}
 	else
-		color = ft_hextodec (str + j + 3);
+		color = ft_hex_to_dec (str + j + 3);
 	return (color);
 }
 
@@ -118,29 +127,11 @@ void	fill_values(t_elem *map, char *line)
 	while (num[i]) 
 	{
 		map[i].value = ft_atoi(num[i]);
-		map[i].color = ft_color(num[i]);
+		map[i].color = ft_color(num[i], map[i].value);
 		free(num[i]);
 		i++;
 	}
 	free(num);
-}
-
-void make_env(t_env **env, int height, int width)
-{
-	int i;
-	
-	i = 0;
-	(*env)->height = height;
-	(*env)->width = width;
-	(*env)->zoom = 20;
-	(*env)->shift_x = 0;
-	(*env)->shift_y = 0;
-	(*env)->map = (t_elem **)malloc(sizeof(t_elem *) * (height + 1));
-	while (i <= height)
-	{
-		(*env)->map[i] = (t_elem *)malloc(sizeof(t_elem) * (width + 1));
-		i++;
-	}
 }
 
 void	read_file(char *file, t_env *env)
@@ -156,19 +147,14 @@ void	read_file(char *file, t_env *env)
 	line = get_next_line(fd);
 	width = get_width(line);
 	make_env(&env, height, width);
-	// map->map = (t_elem **)malloc(sizeof(t_elem *) * (map->height + 1));
-	// i = 0;
-	// while (i <= map->height)
-	// {
-	// 	map->map[i] = (t_elem *)malloc(sizeof(t_elem) * (map->width + 1));
-	// 	i++;
-	// }
 	i = 0;
 	while (line)
 	{
+		// clock
 		fill_values(env->map[i], line);
 		free(line);
 		line = get_next_line(fd);
+		
 		i++;
 	}
 	close(fd);

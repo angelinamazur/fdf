@@ -6,7 +6,7 @@
 /*   By: ptoshiko <ptoshiko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 15:13:14 by ptoshiko          #+#    #+#             */
-/*   Updated: 2022/06/17 17:32:49 by ptoshiko         ###   ########.fr       */
+/*   Updated: 2022/06/18 20:19:19 by ptoshiko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 # include <fcntl.h>
 # include <stddef.h>
 # include <stdlib.h>
+# include <unistd.h>
 # include <mlx.h>
 # include <math.h>
-# define BUFFER_SIZE 100
+# define BUFFER_SIZE 10000
 # define UP 126
 # define DOWN 125 
 # define LEFT 123
@@ -25,6 +26,10 @@
 # define ESC 53
 # define ZOOM_OUT 24
 # define ZOOM_IN 27
+# define Z_DOWN 43
+# define Z_UP 47
+# define ISO_ON 18
+# define ISO_OFF 19
 # define W_WIDTH 1920
 # define W_HEIGHT 1080
 
@@ -40,6 +45,8 @@ typedef struct s_env
 	int		height;
 	t_elem	**map;
 	int		zoom;
+	int		z_k;
+	int		iso_flag;
 	int		shift_x;
 	int		shift_y;
 	void	*mlx_ptr;
@@ -66,5 +73,10 @@ void	read_file(char *file, t_env *env);
 void	bresenham(float x0, float y0, float x1, float y1, t_env *env);
 void	draw(t_env *env);
 void 	free_map(t_elem **map, int height);
+void	move(int key, t_env *env);
+void	zoom(int key, t_env *env);
+void	iso(int key, t_env *env);
+void	flatten(int key, t_env *env);
+void	make_env(t_env **env, int height, int width);
 
 #endif

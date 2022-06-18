@@ -12,5 +12,3 @@ void free_map(t_elem **map, int height)
 	}
 	free(map);
 }
-
-// void 
