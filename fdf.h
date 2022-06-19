@@ -6,7 +6,7 @@
 /*   By: ptoshiko <ptoshiko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 15:13:14 by ptoshiko          #+#    #+#             */
-/*   Updated: 2022/06/18 20:19:19 by ptoshiko         ###   ########.fr       */
+/*   Updated: 2022/06/19 21:55:58 by ptoshiko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,12 @@ void	*ft_calloc(size_t count, size_t size);
 void	read_file(char *file, t_env *env);
 void	bresenham(float x0, float y0, float x1, float y1, t_env *env);
 void	draw(t_env *env);
-void 	free_map(t_elem **map, int height);
+void	free_map(t_elem **map, int height);
 void	move(int key, t_env *env);
 void	zoom(int key, t_env *env);
 void	iso(int key, t_env *env);
 void	flatten(int key, t_env *env);
-void	make_env(t_env **env, int height, int width);
+// void	make_env(t_env **env, int height, int width);
+void	make_env(t_env *env, int height, int width);
 
 #endif

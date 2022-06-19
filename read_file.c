@@ -6,7 +6,7 @@
 /*   By: ptoshiko <ptoshiko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 18:01:38 by ptoshiko          #+#    #+#             */
-/*   Updated: 2022/06/18 22:05:09 by ptoshiko         ###   ########.fr       */
+/*   Updated: 2022/06/19 22:24:13 by ptoshiko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	ft_word_count(char const *s, char c)
 	i = 0;
 	while (s[i])
 	{
-		if (s[i] == c)
+		if (s[i] == c && s[i + 1] != '\n')
 			flag = 1;
 		else if (flag)
 			count++;
@@ -53,8 +53,8 @@ int	get_height(char *file)
 	height = 0;
 	while (line != NULL)
 	{
-		line = get_next_line(fd);
 		free(line);
+		line = get_next_line(fd);
 		height++;
 	}
 	close(fd);
@@ -89,12 +89,12 @@ int ft_hex_to_dec(char *hex)
 	return (dec);
 }
 
-int ft_color(char *str, int value)
+int	ft_color(char *str, int value)
 {
-	int color;
-	int i;
-	int j;
-	
+	int	color;
+	int	i;
+	int	j;
+
 	i = 0;
 	j = 0;
 	while (str[i])
@@ -124,7 +124,7 @@ void	fill_values(t_elem *map, char *line)
 
 	num = ft_split(line, ' ');
 	i = 0;
-	while (num[i]) 
+	while (num[i])
 	{
 		map[i].value = ft_atoi(num[i]);
 		map[i].color = ft_color(num[i], map[i].value);
@@ -146,18 +146,15 @@ void	read_file(char *file, t_env *env)
 	fd = open(file, O_RDONLY, 0);
 	line = get_next_line(fd);
 	width = get_width(line);
-	make_env(&env, height, width);
+	make_env(env, height, width);
 	i = 0;
 	while (line)
 	{
-		// clock
 		fill_values(env->map[i], line);
 		free(line);
 		line = get_next_line(fd);
-		
 		i++;
 	}
 	close(fd);
 	free(line);
-	env->map[i] = NULL;
 }

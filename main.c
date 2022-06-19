@@ -6,7 +6,7 @@
 /*   By: ptoshiko <ptoshiko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 15:18:15 by ptoshiko          #+#    #+#             */
-/*   Updated: 2022/06/18 22:13:52 by ptoshiko         ###   ########.fr       */
+/*   Updated: 2022/06/19 22:39:04 by ptoshiko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,14 @@ int ft_close(void)
 	exit(0);
 }
 
-int		deal_key(int key, t_env *env)
+// int	ft_close(t_env *env)
+// {
+// 	free_map(env->map, env->height);
+// 	free(env);
+// 	exit(0);
+// }
+
+int	deal_key(int key, t_env *env)
 {
 	if (key == UP || key == DOWN || key == LEFT || key == RIGHT)
 		move(key, env);
@@ -33,9 +40,10 @@ int		deal_key(int key, t_env *env)
 	free(env->img);
 	free(env->addr);
 	env->img = mlx_new_image(env->mlx_ptr, 1920, 1080);
-	env->addr = mlx_get_data_addr(env->img, &env->bits_per_pixel, & env->line_length, &env->endian); // how it works
+	env->addr = mlx_get_data_addr(env->img, &env->bits_per_pixel, \
+		& env->line_length, &env->endian); // how it works
 	draw(env);
-	return(0);
+	return (0);
 }
 
 int	main(int argc, char **argv)
@@ -43,22 +51,33 @@ int	main(int argc, char **argv)
 	t_env	*env;
 	int		i;
 	// int		j;
-	
+
 	i = 0;
 	if (argc < 2)
 		return (0);
 	env = (t_env *)malloc(sizeof(t_env));
 	read_file(argv[1], env);
+	printf("height %d\n", env->height);
+	printf("width %d\n", env->width);
+	// while (i < env->height)
+	// {
+	// 	j = 0;
+	// 	while (j < env->width)
+	// 		printf("%3d ", env->map[i][j++].value);
+	// 	i++;
+	// 	printf("\n");
+	// }
 	env->mlx_ptr = mlx_init();
 	env->win_ptr = mlx_new_window(env->mlx_ptr, W_WIDTH, W_HEIGHT, "FDF");
 	env->img = mlx_new_image(env->mlx_ptr, W_WIDTH, W_HEIGHT);
-	env->addr = mlx_get_data_addr(env->img, &env->bits_per_pixel, & env->line_length, &env->endian);
+	env->addr = mlx_get_data_addr(env->img, &env->bits_per_pixel,\
+		& env->line_length, &env->endian);
 	draw(env);
 	mlx_key_hook(env->win_ptr, deal_key, env);
 	mlx_hook(env->win_ptr, 17, 0, ft_close, NULL);
 	mlx_loop(env->mlx_ptr);
-	free(env);
-	return(0);
+	ft_close();
+	return (0);
 }
 
 
