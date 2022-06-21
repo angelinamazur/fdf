@@ -6,13 +6,13 @@
 /*   By: ptoshiko <ptoshiko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 17:33:16 by ptoshiko          #+#    #+#             */
-/*   Updated: 2022/06/18 17:33:55 by ptoshiko         ###   ########.fr       */
+/*   Updated: 2022/06/21 15:29:17 by ptoshiko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void move(int key, t_env *env)
+void	move(int key, t_env *env)
 {
 	if (key == UP)
 		env->shift_y -= 10;
@@ -24,7 +24,7 @@ void move(int key, t_env *env)
 		env->shift_x += 10;
 }
 
-void zoom(int key, t_env *env)
+void	zoom(int key, t_env *env)
 {
 	if (key == ZOOM_IN && env->zoom > 0)
 		env->zoom -= 1;
@@ -32,7 +32,7 @@ void zoom(int key, t_env *env)
 		env->zoom += 1;
 }
 
-void iso(int key, t_env *env)
+void	iso(int key, t_env *env)
 {
 	if (key == ISO_ON)
 		env->iso_flag = 1;
@@ -40,7 +40,7 @@ void iso(int key, t_env *env)
 		env->iso_flag = 0;
 }
 
-void flatten(int key, t_env *env)
+void	flatten(int key, t_env *env)
 {
 	if (key == Z_UP)
 		env->z_k += 1;

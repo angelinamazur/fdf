@@ -6,88 +6,11 @@
 /*   By: ptoshiko <ptoshiko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 18:01:38 by ptoshiko          #+#    #+#             */
-/*   Updated: 2022/06/19 22:24:13 by ptoshiko         ###   ########.fr       */
+/*   Updated: 2022/06/21 15:41:07 by ptoshiko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-static int	ft_word_count(char const *s, char c)
-{
-	size_t	flag;
-	size_t	i;
-	size_t	count;
-
-	flag = 1;
-	count = 0;
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == c && s[i + 1] != '\n')
-			flag = 1;
-		else if (flag)
-			count++;
-		if (s[i] != c)
-			flag = 0;
-		i++;
-	}
-	return (count);
-}
-
-int	get_width(char *line)
-{
-	int		width;
-
-	width = ft_word_count(line, ' ');
-	return (width);
-}
-
-int	get_height(char *file)
-{
-	int		fd;
-	int		height;
-	char	*line;
-
-	fd = open(file, O_RDONLY, 0);
-	line = get_next_line(fd);
-	height = 0;
-	while (line != NULL)
-	{
-		free(line);
-		line = get_next_line(fd);
-		height++;
-	}
-	close(fd);
-	free(line);
-	return (height);
-}
-
-int ft_hex_to_dec(char *hex)
-{
-	int dec;
-	int x;
-	int y;
-	int i;
-	
-	dec = 0;
-	y = 0;
-	i = ft_strlen(hex) - 1;
-	if (hex[i] == '\n')
-		i--;
-	while (i >= 0)
-	{
-		if((hex[i]) >= '0' && (hex[i]) <= '9')
-			x = hex[i] - '0';
-		if ((hex[i]) >= 'A' && (hex[i]) <= 'F')
-			x = hex[i] - 'A' + 10;
-		if ((hex[i]) >= 'a' && (hex[i]) <= 'f')
-			x = hex[i] - 'a' + 10;
-		dec = dec + x * pow(16, y);
-		i--;
-		y++;
-	}
-	return (dec);
-}
 
 int	ft_color(char *str, int value)
 {

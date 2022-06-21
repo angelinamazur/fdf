@@ -1,26 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   hex_to_dec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ptoshiko <ptoshiko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/19 22:20:01 by ptoshiko          #+#    #+#             */
-/*   Updated: 2022/06/21 13:51:52 by ptoshiko         ###   ########.fr       */
+/*   Created: 2022/06/21 15:37:58 by ptoshiko          #+#    #+#             */
+/*   Updated: 2022/06/21 15:38:31 by ptoshiko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	free_map(t_elem **map, int height)
+int	ft_hex_to_dec(char *hex)
 {
+	int	dec;
+	int	x;
+	int	y;
 	int	i;
 
-	i = 0;
-	while (i < height)
+	dec = 0;
+	y = 0;
+	i = ft_strlen(hex) - 1;
+	if (hex[i] == '\n')
+		i--;
+	while (i >= 0)
 	{
-		free(map[i]);
-		i++;
+		if ((hex[i]) >= '0' && (hex[i]) <= '9')
+			x = hex[i] - '0';
+		if ((hex[i]) >= 'A' && (hex[i]) <= 'F')
+			x = hex[i] - 'A' + 10;
+		if ((hex[i]) >= 'a' && (hex[i]) <= 'f')
+			x = hex[i] - 'a' + 10;
+		dec = dec + x * pow(16, y);
+		i--;
+		y++;
 	}
-	free(map);
+	return (dec);
 }

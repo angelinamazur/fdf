@@ -6,7 +6,7 @@
 /*   By: ptoshiko <ptoshiko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 15:13:14 by ptoshiko          #+#    #+#             */
-/*   Updated: 2022/06/19 21:55:58 by ptoshiko         ###   ########.fr       */
+/*   Updated: 2022/06/21 18:39:58 by ptoshiko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,43 @@
 
 typedef struct s_elem
 {
-	int color;
-	int value;
+	int	color;
+	int	value;
 }	t_elem;
+
+// typedef struct s_env
+// {
+// 	int		width;
+// 	int		height;
+// 	t_elem	**map;
+// 	int		zoom;
+// 	int		z_k;
+// 	int		iso_flag;
+// 	int		shift_x;
+// 	int		shift_y;
+// 	void	*mlx_ptr;
+// 	void	*win_ptr;
+// 	void	*img;
+// 	char	*addr;
+// 	int		bits_per_pixel;
+// 	int		line_length;
+// 	int		endian;
+// }	t_env;
+
+// typedef struct s_dots
+// {
+// 	int		x;
+// 	int		y;
+// 	int		x1;
+// 	int		y1;
+// }	t_dots;
 
 typedef struct s_env
 {
+	int		x;
+	int		y;
+	int		x1;
+	int		y1;
 	int		width;
 	int		height;
 	t_elem	**map;
@@ -70,7 +101,10 @@ char	*ft_strdup(const char *s1);
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t count, size_t size);
 void	read_file(char *file, t_env *env);
-void	bresenham(float x0, float y0, float x1, float y1, t_env *env);
+void	bresenham(float x, float y, float x1, float y1, t_env *env);
+int		ft_hex_to_dec(char *hex);
+int		get_width(char *line);
+int		get_height(char *file);
 void	draw(t_env *env);
 void	free_map(t_elem **map, int height);
 void	move(int key, t_env *env);
