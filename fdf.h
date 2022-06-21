@@ -6,7 +6,7 @@
 /*   By: ptoshiko <ptoshiko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 15:13:14 by ptoshiko          #+#    #+#             */
-/*   Updated: 2022/06/21 18:39:58 by ptoshiko         ###   ########.fr       */
+/*   Updated: 2022/06/21 22:43:43 by ptoshiko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,20 +58,19 @@ typedef struct s_elem
 // 	int		endian;
 // }	t_env;
 
-// typedef struct s_dots
-// {
-// 	int		x;
-// 	int		y;
-// 	int		x1;
-// 	int		y1;
-// }	t_dots;
+typedef struct s_dots
+{
+	float	x;
+	float	y;
+	float	x1;
+	float	y1;
+	int		flag;
+}	t_dots;
 
 typedef struct s_env
 {
-	int		x;
-	int		y;
-	int		x1;
-	int		y1;
+	float	z;
+	float	z1;
 	int		width;
 	int		height;
 	t_elem	**map;
@@ -101,7 +100,8 @@ char	*ft_strdup(const char *s1);
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t count, size_t size);
 void	read_file(char *file, t_env *env);
-void	bresenham(float x, float y, float x1, float y1, t_env *env);
+// void	bresenham(float x, float y, float x1, float y1, t_env *env);
+void	bresenham(t_env *env, t_dots dots);
 int		ft_hex_to_dec(char *hex);
 int		get_width(char *line);
 int		get_height(char *file);
